@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Subscription Management</title>
+</head>
+<body>
+
+<h2>Subscription Management</h2>
+
+<h3>Dashboard</h3>
+
+<p>Total Users: <span th:text="${total}"></span></p>
+<p>Monthly Plans: <span th:text="${monthly}"></span></p>
+<p>Yearly Plans: <span th:text="${yearly}"></span></p>
+
+<hr>
+
+<form action="/subscribe" method="post">
+
+    <input type="text"
+           name="name"
+           placeholder="Name"
+           required>
+
+    <input type="email"
+           name="email"
+           placeholder="Email"
+           required>
+
+    <select name="plan">
+        <option>Monthly</option>
+        <option>Yearly</option>
+    </select>
+
+    <button type="submit">
+        Subscribe
+    </button>
+
+</form>
+
+<hr>
+
+<form action="/" method="get">
+
+    <input type="text"
+           name="email"
+           placeholder="Search Email">
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+<hr>
+
+<table border="1">
+
+<tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Plan</th>
+    <th>Status</th>
+</tr>
+
+<tr th:each="s : ${subscriptions}">
+    <td th:text="${s.name}"></td>
+    <td th:text="${s.email}"></td>
+    <td th:text="${s.plan}"></td>
+    <td th:text="${s.status}"></td>
+</tr>
+
+</table>
+
+</body>
+</html>
