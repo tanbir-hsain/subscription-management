@@ -15,7 +15,8 @@ public class SubscriptionController {
 
     @GetMapping("/")
     public String home(
-            @RequestParam(required = false) String email,
+            @RequestParam(required = false)
+            String email,
             Model model) {
 
         model.addAttribute(
@@ -37,6 +38,10 @@ public class SubscriptionController {
             @RequestParam String name,
             @RequestParam String email,
             @RequestParam String plan) {
+
+        if (repository.existsByEmail(email)) {
+            return "redirect:/";
+        }
 
         Subscription s = new Subscription();
 
